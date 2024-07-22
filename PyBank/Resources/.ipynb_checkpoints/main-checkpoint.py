@@ -6,11 +6,11 @@ import csv
 #Total = []
 
 #variables
-Total_Months= 0
-Total_Profits= 0
-Change_Profits= 0
-greatest_Increase= 0
-greatest_Decrease= 0
+total_months= 0
+total_profits= 0
+change_profits= 0
+greatest_increase= 0
+greatest_decrease= 0
 
 budget_csv = os.path.join('budget_data.csv')
 
@@ -19,8 +19,9 @@ with open(budget_csv) as csvfile:
     csvreader = csv.reader(csvfile,delimiter=',')
     csv_header = next(csvreader)
     data = list(csvreader)
+    # print(data[0])
     #print (data)
-    #[['Jan-17', '607208'], 
+    #[['Jan-17', '1088983'], 
     # ['Feb-10', '-354534'], 
     # ['Mar-10', '276622'], .....]
 
@@ -31,26 +32,41 @@ print("Financial Analysis")
 
 print("----------------------------")
 
+changes = []
+# [t_1-t_0, t_2-t_1, t_3-t_2, ...]
+
 # range(86) ======= [0, 1, 2, 3, ..... 85]
-for i in range (86):
+for i in range(86):
+    # print (i)
     # i=2
     # Total_Months=2
-    Total_Months= Total_Months + 1
+    total_months= total_months + 1
     # Total_Months=2 + 1
     row=data[i]
+    # print(row[0])
     #                0          1
     # row ====== ['Mar-17', '276622']
-    one_profit_loss=row[1]
+    one_profit_loss=int(row[1])
     # one_profit_loss======'276622'
-    Total_Profits=Total_Profits + int(one_profit_loss)
+    total_profits = total_profits + one_profit_loss
+    if i > 0 : 
+        change = one_profit_loss - int(data[i-1][1])
+        changes.append(change)
     # Total_Profits='252674' + '276622'
-#   print(row)
+    #   print(row)
+    if 
 
-print("Total Month: " , Total_Months)
 
-print("Total:" , Total_Profits)
+    
+total_change = sum(changes)
 
-# print("Average Change:" + )
+print("Total Months: " + str(total_months))
+
+print("Total:" , total_profits)
+
+average_change =  total_change / (total_months-1)
+
+print("Average Change:" + str(average_change))
 
 # print("Greatest Increase in Profits:" + + )
 
